@@ -1,53 +1,37 @@
-/*var api = 
-require("termux-api").default;
-
-
-
-var result = api.createCommand().batteryStatus().build().run();
-
-result.getOutputObject().then(function(battlevel){
-console.log("works batt:", 
-battlevel.percentage);
-});
-*/
-console.time();
 var api = require("termux-api").default;
 var express = require("express");
 var app = require('express')();
 var http = require('http').Server(app);
-var batteryLevel = -1;
+var battery = -1;
 var temp = "-1";
+var port = 3000;
+
 
 var result = api.createCommand().batteryStatus().build().run();
 
-result.getOutputObject().then(function(battlevel){
+result.getOutputObject().then(function(batt){
 
-console.log("worksbatt:",battlevel.percentage);
+	console.log("Battery Percentage : ", batt.percentage, "%");
+	console.log("Battery Temperature: ", batt.temperature,"F");
 
-batteryLevel = battlevel.percentage;
-temp         = battlevel.temperature;
-batteryLevel = "<h1> Battery Level : " + batteryLevel + "</h1>";
+	battery = batt.percentage;
+	temp    = batt.temperature;
+	battery = "<h1> Battery Percentage : " + battery + "%</h1>";
 
-temp = "<h2> Battery Tempature : " + (((temp * 9)/5 )+ 32)  + "</h2>";
-console.log(batteryLevel);
+	temp    = "<h2> Battery Tempature  : " + ( ( ( temp * 9 ) / 5 ) + 32)  
++ 
+" F</h2>";
 
-console.log(temp);
-app.get('/',function(req, res){	res.send(batteryLevel + temp);});
+	//console.log(battery);
+	//console.log(temp);
+
+	app.get('/',function(req, res){	res.send(battery + temp);});
 
 });
 
 
-/*
-app.get('/',function(req, res){
-
-res.send('<h1>Batterystatus</h1>');
-
-res.send(batteryLevel);
-console.timeEnd();
-});
-*/
-http.listen(3000, function(){
-console.log('listening on *:3000');
+http.listen(port, function(){
+	console.log('listening on http://localhost:' + port);
 });
 
 
