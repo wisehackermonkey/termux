@@ -1,0 +1,24 @@
+{
+  "name": "termnux",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wisehackermonkey/termux.git"
+  },
+  "author": "oran collins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wisehackermonkey/termux/issues"
+  },
+  "homepage": "https://github.com/wisehackermonkey/termux#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "termux-api": "0.0.1"
+  }
+}
